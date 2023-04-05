@@ -1,0 +1,11 @@
+inicio:
+X=12;
+Y=6;
+W=AeB;
+X=10;
+Y=3;
+W=AoB;
+W=nAeB;
+X=13;
+W=Bn;
+fim.
