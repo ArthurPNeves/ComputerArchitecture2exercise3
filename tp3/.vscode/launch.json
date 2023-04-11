@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "teste",
+      "request": "launch",
+      "mainClass": "teste",
+      "projectName": "tp3_13aadd28"
+    },
+    {
+      "type": "java",
       "name": "ulaToHex",
       "request": "launch",
       "mainClass": "ulaToHex",

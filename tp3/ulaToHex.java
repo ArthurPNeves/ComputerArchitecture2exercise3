@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.HexFormat;
@@ -9,10 +11,12 @@ public class ulaToHex {
     int x = 0;
     int y = 0;
     int w = 0;
+    int contador = 0;
 
     public void converte() throws IOException
     {
-
+        File file = new File("testeula.hex");
+        
         BufferedReader br = new BufferedReader((new FileReader("testeula.ula")));
         String linha = br.readLine();
         while (linha.compareTo("fim.") != 0) {
@@ -40,29 +44,35 @@ public class ulaToHex {
                 for (int i = 2; i < linha.length() -1; i++) {
                     linha2 = linha2 + linha.charAt(i);
                 }
-
+                
                 WtoInt(linha2);
-
+                contador++;
                 intToHex();
             }
 
         }
 
         br.close();
-
+      
+       try (FileWriter writer = new FileWriter(file, true)) {
+        writer.write("0xffff");
+    }
+        
     }
 
     public void intToHex() throws IOException
     {
         
-        RandomAccessFile arq = new RandomAccessFile("testeula.hex", "rw");
-        arq.seek(arq.length());
+        
         String s1 =   String.format("%X%X%X", x, y, w);
-        arq.writeChar(s1.charAt(0));
-        arq.writeChar(s1.charAt(1));
-        arq.writeChar(s1.charAt(2));
-        arq.writeChar(' ');
-        arq.close();
+        File file = new File("testeula.hex");
+        try (FileWriter writer = new FileWriter(file, true)) {
+            writer.write(s1);
+            writer.write('\n');
+            writer.close();
+        }
+        
+        
 
     }
 
